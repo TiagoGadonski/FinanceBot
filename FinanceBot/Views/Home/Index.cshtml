@@ -1,0 +1,100 @@
+﻿@model FinanceBot.Models.FinanceViewModel
+@{
+    ViewData["Title"] = "Finance Bot Dashboard";
+}
+
+<div class="container">
+    <h1>Finance Bot Dashboard</h1>
+
+    <h2>Rising Cryptos</h2>
+    <ul>
+        @foreach (var crypto in Model.RisingCryptos)
+        {
+            <li>@crypto.Name - @crypto.PriceChangePercentage24h%</li>
+        }
+    </ul>
+
+    <h2>Falling Cryptos</h2>
+    <ul>
+        @foreach (var crypto in Model.FallingCryptos)
+        {
+            <li>@crypto.Name - @crypto.PriceChangePercentage24h%</li>
+        }
+    </ul>
+
+    <h2>Cheapest Cryptos</h2>
+    <ul>
+        @foreach (var crypto in Model.CheapestCryptos)
+        {
+            <li>@crypto.Name - $@crypto.CurrentPrice</li>
+        }
+    </ul>
+
+    <h2>Most Expensive Cryptos</h2>
+    <ul>
+        @foreach (var crypto in Model.MostExpensiveCryptos)
+        {
+            <li>@crypto.Name - $@crypto.CurrentPrice</li>
+        }
+    </ul>
+
+    <h2>Rising Stocks</h2>
+    <ul>
+        @foreach (var stock in Model.RisingStocks)
+        {
+            <li>@stock.Name - @stock.PriceChangePercentage24h%</li>
+        }
+    </ul>
+
+    <h2>Falling Stocks</h2>
+    <ul>
+        @foreach (var stock in Model.FallingStocks)
+        {
+            <li>@stock.Name - @stock.PriceChangePercentage24h%</li>
+        }
+    </ul>
+
+    <h2>Cheapest Stocks</h2>
+    <ul>
+        @foreach (var stock in Model.CheapestStocks)
+        {
+            <li>@stock.Name - $@stock.CurrentPrice</li>
+        }
+    </ul>
+
+    <h2>Most Expensive Stocks</h2>
+    <ul>
+        @foreach (var stock in Model.MostExpensiveStocks)
+        {
+            <li>@stock.Name - $@stock.CurrentPrice</li>
+        }
+    </ul>
+
+    <form asp-action="AutoTrade" method="post">
+        <button type="submit" class="btn btn-primary">Start Auto Trading</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.RisingCryptos.Select(c => c.Name))),
+            datasets: [{
+                label: 'Price Change Percentage',
+                data: @Html.Raw(Json.Serialize(Model.RisingCryptos.Select(c => c.PriceChangePercentage24h))),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
