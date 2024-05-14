@@ -51,12 +51,12 @@ namespace FinanceBot.Services
 
     public class MarketData
     {
-        public float PriceChangePercentage24h { get; set; }
-        public float MarketCap { get; set; }
-        public float CurrentPrice { get; set; }
-        public float SMA { get; set; }
-        public float EMA { get; set; }
-        public float RSI { get; set; }
+        public decimal PriceChangePercentage24h { get; set; }
+        public decimal MarketCap { get; set; }
+        public decimal CurrentPrice { get; set; }
+        public decimal SMA { get; set; }
+        public decimal EMA { get; set; }
+        public decimal RSI { get; set; }
     }
 
     public class MarketDataPrediction

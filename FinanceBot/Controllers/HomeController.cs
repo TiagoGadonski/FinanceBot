@@ -61,9 +61,9 @@ namespace FinanceBot.Controllers
             {
                 var prediction = _mlService.Predict(new MarketData
                 {
-                    PriceChangePercentage24h = (float)crypto.PriceChangePercentage24h,
-                    MarketCap = (float)crypto.MarketCap,
-                    CurrentPrice = (float)crypto.CurrentPrice
+                    PriceChangePercentage24h = crypto.PriceChangePercentage24h,
+                    MarketCap = crypto.MarketCap,
+                    CurrentPrice = crypto.CurrentPrice
                 });
 
                 if (prediction > 0.5) // Arbitrary threshold for buying
@@ -80,9 +80,9 @@ namespace FinanceBot.Controllers
             {
                 var prediction = _mlService.Predict(new MarketData
                 {
-                    PriceChangePercentage24h = (float)stock.PriceChangePercentage24h,
-                    MarketCap = (float)stock.MarketCap,
-                    CurrentPrice = (float)stock.CurrentPrice
+                    PriceChangePercentage24h = stock.PriceChangePercentage24h,
+                    MarketCap = stock.MarketCap,
+                    CurrentPrice = stock.CurrentPrice
                 });
 
                 if (prediction > 0.5) // Arbitrary threshold for buying
